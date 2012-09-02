@@ -4,6 +4,9 @@
     It's a base for database's models(tables)
 
     `from pyquark.modelbase import *`
+
+    * please avoid using `_` in ModelName and Table's name
+    * please use get_base() for Base
 """
 
 from sqlalchemy import MetaData

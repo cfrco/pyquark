@@ -29,6 +29,43 @@ def act_reset(option,arg,setting):
         mod = find_model(setting.data_models,model_name)
         reset_model(mod)
 
+def act_create_table(option,arg,setting):
+    for table_name in arg:
+        table_name = table_name.replace(".","_")
+        mod,table = find_table(setting.data_models,table_name)
+
+        if mod :
+            mod.database.create_engine()
+            table.create(mod.database.engine,checkfirst=mod.database.check)
+            mod.database.dispose_engine()
+        else :
+            print 'No this table `%s`.' % table_name
+
+def act_drop_table(option,arg,setting):
+    for table_name in arg:
+        table_name = table_name.replace(".","_")
+        mod,table = find_table(setting.data_models,table_name)
+
+        if mod :
+            mod.database.create_engine()
+            table.drop(mod.database.engine,checkfirst=mod.database.check)
+            mod.database.dispose_engine()
+        else :
+            print 'No this table `%s`.' % table_name
+
+def act_reset_table(option,arg,setting):
+    for table_name in arg:
+        table_name = table_name.replace(".","_")
+        mod,table = find_table(setting.data_models,table_name)
+
+        if mod :
+            mod.database.create_engine()
+            table.drop(mod.database.engine,checkfirst=mod.database.check)
+            table.create(mod.database.engine,checkfirst=mod.database.check)
+            mod.database.dispose_engine()
+        else :
+            print 'No this table `%s`.' % table_name
+
 def act_list(option,arg,setting):
     for model_name in arg:
         mod = find_model(setting.data_models,model_name)
@@ -80,6 +117,13 @@ def find_model(models,name):
             return model
     return None
 
+def find_table(models,name):
+    for model in models:
+        for table in model.module.Base.metadata.sorted_tables:
+            if table.name == name :
+                return model,table
+    return None,None
+
 option_list = {
     "create" : act_create,
     "drop" : act_drop,
@@ -87,6 +131,9 @@ option_list = {
     "create-all" : act_create_all,
     "drop-all" : act_drop_all,
     "reset-all" : act_reset_all,
+    "create-table": act_create_table,
+    "drop-table": act_drop_table,
+    "reset-table": act_reset_table,
     "list-model" : act_list_model,
     "list-all" : act_list_all,
     "list": act_list
