@@ -5,9 +5,11 @@ from optparse import OptionParser
 import imp
 
 import database
+import web
 
 option_list = {
-    "database":database        
+    "database" : database,
+    "web" : web
 }
 
 def opt_get():
@@ -20,8 +22,17 @@ def opt_get():
 def main(): 
     option,arg = opt_get()
     setting = imp.load_source('quark_setting_file',option.filename)
-    
-    if arg[0] in option_list:
+
+    if arg[0] == "help":
+        for k,v in option_list.items() :
+            print k
+            for op in v.option_list:
+                print "    "+op
+
+    elif len(arg) < 2 :
+        print 'At least need 2 arguments.'
+
+    elif arg[0] in option_list:
         name = arg.pop(0)
         if arg[0] in option_list[name].option_list:
             action = arg.pop(0)
