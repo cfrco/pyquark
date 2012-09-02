@@ -9,6 +9,7 @@ import database
 option_list = {
     "database":database        
 }
+
 def opt_get():
     parser = OptionParser()
     parser.add_option("-f","--file",action="store",default="setting.py",

@@ -1,8 +1,8 @@
 from pyquark.database import Model,DataBase
+
 db = DataBase("sqlite:///db.sqlite")
+db.echo = True
 
 import model
-m = Model(model,db)
-m.database.echo = True
-
-data_models = [m]
+import issue
+data_models = [Model(model,db),Model(issue,db)]

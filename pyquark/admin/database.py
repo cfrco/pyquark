@@ -2,6 +2,18 @@
 
 from optparse import OptionParser
 
+def act_create_all(option,arg,setting):
+    for mod in setting.data_models:
+        create_model(mod)
+
+def act_drop_all(option,arg,setting):
+    for mod in setting.data_models:
+        drop_model(mod)
+
+def act_reset_all(option,arg,setting):
+    for mod in setting.data_models:
+        reset_model(mod)
+
 def act_create(option,arg,setting):
     for model_name in arg:
         mod = find_model(setting.data_models,model_name)
@@ -50,7 +62,10 @@ def find_model(models,name):
 option_list = {
     "create" : act_create,
     "drop" : act_drop,
-    "reset" : act_reset
+    "reset" : act_reset,
+    "create-all" : act_create_all,
+    "drop-all" : act_drop_all,
+    "reset-all" : act_reset_all
 }
 
 if __name__ == "__main__":
