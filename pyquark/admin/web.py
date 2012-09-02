@@ -3,34 +3,29 @@
 from zipfile import ZipFile
 from urllib import urlopen
 
+"""
+    setting file have to gived `bootstrap_path`,if user wants to use this feature.
+"""
 def act_bootstrap_install(option,arg,setting):
-    if len(arg) < 1:
-        print "No filepath"
+    if len(arg) == 0: filename = "bootstrap.zip"
+    else : filename = arg[0]
 
-    else :
-        with ZipFile(arg[0],"r") as zp:
-            if "bootstrap_path" in dir(setting):
-                path = setting.bootstrap_path
-            else :
-                path = "static/"
+    with ZipFile(filename,"r") as zp:
+        path = setting.bootstrap_path
+        namelist = zp.namelist()
 
-            namelist = zp.namelist()
+        for name in namelist:
+            if name.startswith(".") or name.startswith("/") :
+                namelist.remove(name)
 
-            for name in namelist:
-                if name.startswith(".") or name.startswith("/") :
-                    namelist.remove(name)
+        for name in namelist:
+            print path+name
 
-            for name in namelist:
-                print path+name
-
-            zp.extractall(path,namelist)
+        zp.extractall(path,namelist)
 
 def act_bootstrap_uninstall(option,arg,setting):
     import os
-    if "bootstrap_path" in dir(setting):
-        path = setting.bootstrap_path
-    else :
-        path = "static/"
+    path = setting.bootstrap_path
     os.system("rm -rv "+path+"bootstrap")
 
 def act_bootstrap_get(option,arg,setting):
