@@ -1,5 +1,6 @@
 from pyquark.modelbase import *
 
+Base = get_base()
 ModelName = "test"
 TableArgs = {}
 #TableArgs = {'mysql_engine':'InnoDB','mysql_charset':'utf8'}
