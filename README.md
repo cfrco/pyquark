@@ -15,4 +15,4 @@ Third part
   * bootstrap(#1)
   * flask(#1)
 
-  #1 : It's not necessary,but some of feature may depend on it.
+  1 : It's not necessary,but some of feature may depend on it.
