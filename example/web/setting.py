@@ -8,3 +8,6 @@ import issue
 data_models = [Model(model,db),Model(issue,db)]
 
 bootstrap_path = "static/"
+
+import layout
+layouts = layout.layouts

@@ -37,8 +37,17 @@ def act_bootstrap_get(option,arg,setting):
     fp.write(req.read())
     fp.close()
 
+def act_layout(option,arg,setting):
+    for name in arg:
+        if name in setting.layouts:
+            setting.layouts[name].tofile()
+            print "%s -> %s" %(name,setting.layouts[name].target)
+        else :
+            print "No layout name `%s`" % (name)
+
 option_list = {
     "bootstrap-install": act_bootstrap_install,
     "bootstrap-uninstall": act_bootstrap_uninstall,
-    "bootstrap-get": act_bootstrap_get
+    "bootstrap-get": act_bootstrap_get,
+    "layout" : act_layout
 }
