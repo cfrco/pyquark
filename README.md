@@ -6,7 +6,10 @@ Introduction
 ------------
 It's a tool kit for web developer.
   * Develop
+    * Bootstrap auto install(*)
+    * Web Layout (help user generate template or static webpage)(*)
   * Admin
+    * DataBase(drop,create,reset) (sqlalchemy base)
   * Deploy
 
 Third part
