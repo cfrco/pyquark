@@ -2,6 +2,7 @@
 
 from sqlalchemy import engine
 from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker,scoped_session
 
 class DataBase:
     """
@@ -16,6 +17,7 @@ class DataBase:
         self.encoding = "utf-8"
 
         self.engine = None
+        self.sessionmaker = None
 
     def create_engine(self):
         if self.engine == None:
@@ -27,6 +29,14 @@ class DataBase:
         if self.engine:
             self.engine.dispose()
             self.engine = None
+
+    def get_session(self):
+        if self.engine == None:
+            self.create_engine()
+        if self.sessionmaker == None:
+            self.sessionmaker = sessionmaker(bind=self.engine)
+
+        return scoped_session(self.sessionmaker)
 
     @staticmethod
     def MySQL_URI(host,user,password,database,port=None,charset="utf-8"):
