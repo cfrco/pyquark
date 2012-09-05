@@ -8,7 +8,7 @@ It's a tool kit for web developer.
   * Develop
     * Bootstrap auto install(*)
     * Web Layout (help user generate template or static webpage)(*)
-    * Regex (regex check:UserId,UserEmail,etc...)
+    * Check (regex check:UserId,UserEmail,etc...)
   * Admin
     * DataBase(drop,create,reset) (sqlalchemy base)
   * Deploy
