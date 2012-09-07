@@ -54,3 +54,25 @@ def TextField(name,placeholder="",rows=5,content="",br=True,attrs={}):
         out += "<br/>"
     out += "\n"
     return out
+
+def SelectField(name,options,multiple=False,br=True,attrs={}):
+    out = "<select name=\"%s\" " % name
+    
+    if multiple :
+        out += "multiple=\"multiple\" "
+    
+    for k,v in attrs.items():
+        out += k+"=\"%s\" " % (v)
+
+    out += ">\n"
+
+    if isinstance(options,dict):
+        for k,v in options.items():
+            out += "<option value=\"%s\">%s</option>\n" % (k,v)
+
+    else :
+        for v in options:
+            out += "<option>%s</option>\n" % v
+
+    out +=  "</select>"
+    return out
