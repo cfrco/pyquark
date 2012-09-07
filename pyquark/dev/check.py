@@ -74,7 +74,7 @@ class User:
                 return str_password
 
         #have upper and lower letter and digit and others
-        elif level == 4:
+        elif level == 3:
             if lower>0 and upper>0 and digit>0 and other>0:
                 return str_password
 
