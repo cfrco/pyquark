@@ -76,3 +76,23 @@ def SelectField(name,options,multiple=False,br=True,attrs={}):
 
     out +=  "</select>"
     return out
+
+def PreApp(inputfield,pre=None,app=None):
+    out = "<div class=\""
+    
+    if pre :
+        out += " input-prepend "
+    if app :
+        out += " input-append "
+
+    out += "\">"
+    
+    if pre :
+        out += "<span class=\"add-on\">%s</span>" % pre
+    out += inputfield
+    if app :
+        out += "<span class=\"add-on\">%s</span>" % app
+    out += "</div>"
+
+    return out
+   
