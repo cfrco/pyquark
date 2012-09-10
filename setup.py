@@ -8,5 +8,5 @@ setup(
         version = __version__,
         author = 'cfrco',
         author_email='z82206.cat@gmail.com',
-        packages = ['pyquark','pyquark.admin','pyquark.web']
+        packages = ['pyquark','pyquark.admin','pyquark.web','pyquark.dev']
 )
