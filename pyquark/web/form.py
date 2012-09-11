@@ -1,17 +1,28 @@
 # -*- coding:utf-8 -*-
 
 class Form:
-    def __init__(self,method="POST",action="",clas=""):
+    def __init__(self,method="POST",action="",clas="",fields=[]):
         self.method = method
         self.action = action
         self.clas = clas
-        self.fields = []
+        self.target = ""
+        self.fields = fields
 
     def append(self,field):
         self.fields.append(field)
 
     def insert(self,index,field):
         self.fields.insert(index,field)
+
+    def print_text(self):
+        print str(self)
+
+    def tofile(self,filename=None):
+        if filename == None:
+            filename = self.target
+
+        with open(filename,"w") as fp:
+            fp.write(str(self))
 
     def __str__(self):
         out = "<form method=\"%s\" action=\"%s\" class=\"%s\">\n" %\
@@ -78,6 +89,9 @@ def SelectField(name,options,multiple=False,br=True,attrs={}):
     return out
 
 def PreApp(inputfield,pre=None,app=None):
+    """
+        this is for bootstrap
+    """
     out = "<div class=\""
     
     if pre :

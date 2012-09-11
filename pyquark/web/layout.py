@@ -14,6 +14,9 @@ class Layout:
         with open(filename,"w") as fp:
             fp.write(self.out())
 
+    def print_text(self):
+        print self.out()
+
     def out(self):
         if self.sketon == "main":
             from .layout_main import template
