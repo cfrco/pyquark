@@ -7,7 +7,6 @@ Introduction
 It's a tool kit for web developer.
   * Web (develop front-end web)
     * Bootstrap auto install(*)
-    * Web Layout (help user generate template or static webpage)(*)
     * From Generating,Layout
   * Develop
     * Check (regex check:UserId,UserEmail,etc...)
