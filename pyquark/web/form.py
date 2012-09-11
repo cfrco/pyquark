@@ -6,7 +6,7 @@ class Form:
         self.action = action
         self.clas = clas
         self.target = ""
-        if fields != None
+        if fields != None:
             self.fields = fields
 
     def append(self,field):
