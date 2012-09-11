@@ -38,23 +38,31 @@ class Form:
         out += "</form>"
         return out
 
-def InputField(itype,name,placeholder="",br=True,attrs={}):
-    out = "<input type=\"%s\" name=\"%s\" placeholder=\"%s\" " %\
+def InputField(itype,name,placeholder="",br=True,attrs={},title=None):
+    out = ""
+    if title:
+        out += "<div class=\"control-group\"><label class=\"control-label\">%s</label>" % title
+        out += "<div class=\"controls\">"
+
+    out += "<input type=\"%s\" name=\"%s\" placeholder=\"%s\" " %\
             (itype,name,placeholder)
     for k,v in attrs.items():
         out += k+"=\"%s\" " % (v)
 
     out += ">"
-    if br:
+    if br and not title:
         out += "<br/>"
+
+    if title:
+        out += "</div></div>"
     out += "\n"
     return out
 
-def StringField(name,placeholder="",br=True,attrs={}):
-    return InputField("text",name,placeholder,br,attrs)
+def StringField(name,placeholder="",br=True,attrs={},title=None):
+    return InputField("text",name,placeholder,br,attrs,title)
 
-def PasswordField(name,placeholder="",br=True,attrs={}):
-    return InputField("password",name,placeholder,br,attrs)
+def PasswordField(name,placeholder="",br=True,attrs={},title=None):
+    return InputField("password",name,placeholder,br,attrs,title)
 
 def TextField(name,placeholder="",rows=5,content="",br=True,attrs={}):
     out = "<textarea name=\"%s\" rows=\"%d\" placholder=\"%s\" " %\
