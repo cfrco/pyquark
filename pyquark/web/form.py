@@ -1,12 +1,13 @@
 # -*- coding:utf-8 -*-
 
 class Form:
-    def __init__(self,method="POST",action="",clas="",fields=[]):
+    def __init__(self,method="POST",action="",clas="",fields=None):
         self.method = method
         self.action = action
         self.clas = clas
         self.target = ""
-        self.fields = fields
+        if fields != None
+            self.fields = fields
 
     def append(self,field):
         self.fields.append(field)
