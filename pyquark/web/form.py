@@ -6,8 +6,11 @@ class Form:
         self.action = action
         self.clas = clas
         self.target = ""
+
         if fields != None:
             self.fields = fields
+        else :
+            self.fields = []
 
     def append(self,field):
         self.fields.append(field)
