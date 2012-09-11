@@ -2,6 +2,7 @@
 
 from zipfile import ZipFile
 from urllib import urlopen
+from ..web.layout import replace_layout
 
 """
     setting file have to gived `bootstrap_path`,if user wants to use this feature.
@@ -50,10 +51,24 @@ def act_layout(option,arg,setting):
         if name in setting.layouts:
             setting.layouts[name].print_text()
 
+def act_layout_replace(option,arg,setting):
+    if len(arg) != 2:
+        print "Error!!"
+        return 
+
+    with open(arg[0],"r") as srcfp:
+        with open(arg[1],"w") as destfp:
+
+            for line in srcfp:
+                destfp.write(replace_layout(line,setting.layouts))
+
+    print "%s -> %s" %(arg[0],arg[1])
+
 option_list = {
     "bootstrap-install": act_bootstrap_install,
     "bootstrap-uninstall": act_bootstrap_uninstall,
     "bootstrap-get": act_bootstrap_get,
     "layout-file" : act_layout_file,
-    "layout" : act_layout
+    "layout" : act_layout,
+    "layout-replace": act_layout_replace
 }
