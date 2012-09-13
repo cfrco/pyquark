@@ -6,6 +6,28 @@ class DoingError(Exception):
     pass
 
 class MessageHub:
+    """
+        hub = MessageHub()
+        hub.check(user.set_name(....),False,set_name_error_message,"error")
+        # when user.set_name(...) == False => 
+        # (set_name_error_message,"error") will be push into hub
+
+        if hub.has_error():
+            #do_things
+            hub.flash_message() # for flask flash
+            return render_template(....)
+
+        #or
+
+        hub = MessageHub(raise_error=True)
+        try:
+            hub.check(user.set_name(....),False,set_name_error_message,"error")
+            #others...
+        except DoingError:
+            #do_things
+            #db_session.rollback()
+            #....
+    """
     def __init__(self,raise_error=False):
         self.messages = []
         self.counter = {"error":0,"success":0,"info":0}
@@ -39,6 +61,10 @@ class MessageHub:
             return False
 
     def flash_message(self,filter=None):
+        """
+            flash_message() # push all messages
+            flash_message(filter=["success"]) # push `success` messafes
+        """
         if filter == None:
             for message in self.messages:
                 flash(message[0],message[1])
